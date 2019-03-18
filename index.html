@@ -177,8 +177,7 @@
 <h2 id="解决方案二"><a href="#解决方案二" class="headerlink" title="解决方案二"></a>解决方案二</h2><p> 　　可以直接在高度塌陷的父元素的最后添加一个空div。<br> 　　由于这个div没有浮动，它就可以撑开父元素的高度了。然后对他清除浮动的影响，这样可以通过空白div来撑开父元素的高度。<br> 　　缺陷：添加了一个没有作用的div。</p>
 <h2 id="解决方案三"><a href="#解决方案三" class="headerlink" title="解决方案三"></a>解决方案三</h2><p>　　此方案是最为推荐的一种解决方法。<br>　　可以通过after伪类向元素的最后添加一个空白的块元素，然后对其清除浮动。<br>　　这个和方案2原理相同(IE6不支持)。</p>
 <p> 代码如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.clearfix:after&#123;</span><br><span class="line">    /* 添加内容 */</span><br><span class="line">    content： &quot;&quot;;</span><br><span class="line">    /* 转换为块元素 */</span><br><span class="line">    display： block;</span><br><span class="line">    /* 清除两侧浮动 */</span><br><span class="line">    clear： both;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix&#123;</span><br><span class="line">    zoom: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><pre><code>clear属性可以用来清除其他浮动元素对当前元素的影响。清除浮动以后，元素会回到其他元素浮动之前的位置。
-</code></pre><p>　　可选值：<br>　　  -left     清除左侧浮动元素对当前元素的影响<br>　　  -right    清除右侧浮动元素对当前元素的影响<br>　　  -both     清除两侧浮动元素对当前元素的影响(清除影响对他最大的元素的浮动)<br>　　  -none     不清除影响</p>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><p>　　clear属性可以用来清除其他浮动元素对当前元素的影响。清除浮动以后，元素会回到其他元素浮动之前的位置。<br>　　可选值：<br>　　  -left     清除左侧浮动元素对当前元素的影响<br>　　  -right    清除右侧浮动元素对当前元素的影响<br>　　  -both     清除两侧浮动元素对当前元素的影响(清除影响对他最大的元素的浮动)<br>　　  -none     不清除影响</p>
 
       
 
@@ -334,10 +333,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">高度塌陷</a>
