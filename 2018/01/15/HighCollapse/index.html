@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="高度塌陷　　在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素多高。但是当为子元素设置浮动后，子元素会完全脱离文档流，此时将会导致无法撑起父元素的高度，导致父元素的高度塌陷。  　　由于父元素的高度塌陷，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱，所以在开发中一定要避免出现高度塌陷的问题。 　　其实我们可以将父元素的高度写死，以避免塌陷的问题出现。但是一旦高度写">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-19T14:38:48.128Z">
+<meta property="og:updated_time" content="2019-03-19T14:47:25.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决高度塌陷与清除浮动">
 <meta name="twitter:description" content="高度塌陷　　在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素多高。但是当为子元素设置浮动后，子元素会完全脱离文档流，此时将会导致无法撑起父元素的高度，导致父元素的高度塌陷。  　　由于父元素的高度塌陷，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱，所以在开发中一定要避免出现高度塌陷的问题。 　　其实我们可以将父元素的高度写死，以避免塌陷的问题出现。但是一旦高度写">
@@ -179,7 +179,7 @@
 <p>　　开启BFC的方法：<br>　　　　1、设置元素浮动属性float<br>　　　　　缺陷：虽然可以撑开父元素，但会导致父元素的宽度丢失，而且也会导致下边的元素上移。<br>　　　　2、设置元素的display属性为inline-block<br>　　　　　缺陷：可以解决问题，但也会导致宽度丢失。<br>　　　　3、将overflow属性设置为一个非visible的值(推荐)<br>　　　　　缺陷：IE6不支持。<br>　　　　　但IE6有另一个隐藏属性hasLayout和BFC的作用类似，可以通过样式可以开启hasLayout。<br>　　　　　将元素的zoom属性设置为1就行。zoom表示放大，zoom为1表示不放大。zoom只在IE支持。<br>　　　　4、设置元素绝对定位</p>
 <h2 id="解决方案二"><a href="#解决方案二" class="headerlink" title="解决方案二"></a>解决方案二</h2><p> 　　可以直接在高度塌陷的父元素的最后添加一个空div。<br> 　　由于这个div没有浮动，它就可以撑开父元素的高度了。然后对他清除浮动的影响，这样可以通过空白div来撑开父元素的高度。<br> 　　缺陷：添加了一个没有作用的div。</p>
 <h2 id="解决方案三"><a href="#解决方案三" class="headerlink" title="解决方案三"></a>解决方案三</h2><p>　　此方案是最为推荐的一种解决方法。<br>　　可以通过after伪类向元素的最后添加一个空白的块元素，然后对其清除浮动。<br>　　这个和方案2原理相同(IE6不支持)。</p>
-<p> 代码如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.clearfix:after&#123;</span><br><span class="line">    /* 添加内容 */</span><br><span class="line">    content： &quot;&quot;;</span><br><span class="line">    /* 转换为块元素 */</span><br><span class="line">    display： block;</span><br><span class="line">    /* 清除两侧浮动 */</span><br><span class="line">    clear： both;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix&#123;</span><br><span class="line">    zoom: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.clearfix:after&#123;</span><br><span class="line">    /* 添加内容 */</span><br><span class="line">    content： &quot;&quot;;</span><br><span class="line">    /* 转换为块元素 */</span><br><span class="line">    display： block;</span><br><span class="line">    /* 清除两侧浮动 */</span><br><span class="line">    clear： both;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix&#123;</span><br><span class="line">    zoom: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><p>　　clear属性可以用来清除其他浮动元素对当前元素的影响。清除浮动以后，元素会回到其他元素浮动之前的位置。<br>　　可选值：<br>　　  -left     清除左侧浮动元素对当前元素的影响<br>　　  -right    清除右侧浮动元素对当前元素的影响<br>　　  -both     清除两侧浮动元素对当前元素的影响(清除影响对他最大的元素的浮动)<br>　　  -none     不清除影响</p>
 
       
@@ -301,11 +301,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2018/01/10/Selector/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Selector</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2018/01/20/Selector/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Selector
+        
+      </div>
     </a>
+  
   
 </nav>
 
